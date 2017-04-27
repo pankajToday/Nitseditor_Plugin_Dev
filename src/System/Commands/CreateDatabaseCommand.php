@@ -106,7 +106,7 @@ class '. $dbName .'Table extends Migrations
      *
      * @return void
      */
-    public function up()
+    public static function up()
     {
         Schema::create(\''. $dbName .'\', function (Blueprint $table) {
         
@@ -118,7 +118,7 @@ class '. $dbName .'Table extends Migrations
      *
      * @return void
      */
-    public function down()
+    public static function down()
     {
         Schema::dropIfExists(\''. $dbName .'\');
     }

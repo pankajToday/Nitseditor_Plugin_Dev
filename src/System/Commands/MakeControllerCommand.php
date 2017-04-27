@@ -89,7 +89,7 @@ class MakeControllerCommand extends Command
     {
         return '<?php
 
-namespace Nitseditor\Plugins\\' . $pluginName . '\Controllers;
+namespace Nitseditor\Plugins' . $pluginName . '\Controllers;
         
               
 use App\Http\Controllers\Controller;

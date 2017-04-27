@@ -2,6 +2,9 @@
 
 return [
     'packages' => [
-        //Configure your plugins here
+        'blog'         => [
+            'name'             => 'Blog',
+            'description'      => 'NitsEditor Blog for Laravel 5.4',
+        ],
     ],
 ];
