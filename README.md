@@ -10,13 +10,11 @@ Now add the following service provider in `config/app.php` file
 
     Nitseditor\System\Providers\NitsEditorServiceProvider::class,
     
-You can check your installation by typing:
+You can check your installation by refreshing the home page, you will get home page of nits editor.
     
-    http://localhost/your_project_folder/Nitseditor
+# php artisan nitsPlugin Commands:
 
-You will get home page of nits editor.
-    
-Now there are few commands which you can utilise to create your plugins for example suppose you want to create blogs plugin then you can type:
+There are few commands which you can utilise to create your plugins for example suppose you want to create blogs plugin then you can type:
 
     $ php artisan nitsPlugin:createPlugin
     
