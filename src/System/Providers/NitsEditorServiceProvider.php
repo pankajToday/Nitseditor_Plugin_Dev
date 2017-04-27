@@ -124,7 +124,7 @@ class NitsEditorServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the nitsPlugin:createDatabase Command.
+     * Register the nitsPlugin:migrateDatabase Command.
      *
      * @return void
      */
