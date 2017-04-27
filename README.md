@@ -41,8 +41,22 @@ Similarly you can have models by this command:
 
     $ php artisan nitsPlguin:makeModel Blog
     
+You can check your file inside `Plugins/Blog/Models/` folder.    
+    
 For controllers you can type:
 
     $ php artisan nitsPlugin:makeController Blog
     
-By default it will create BlogController inside `Plugins/Blogs/Controllers/BlogController`
+By default it will create `BlogController` class inside `Plugins/Blog/Controllers/BlogController` folder
+
+You can create databases by this command:
+
+    $ php artisan nitsPlugin:createDatabase Blog
+    
+By default it will make database with class `BlogTable` inside `Plugins/Blog/Databases/`
+    
+For migrating the database:
+    
+    $ php artisan nitsPlugin:migrateDatabase Blog
+
+This will by default take the up function inside `BlogTable` class and create the tables in the database.     
