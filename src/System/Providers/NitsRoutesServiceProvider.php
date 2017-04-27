@@ -25,7 +25,7 @@ class NitsRoutesServiceProvider extends RouteServiceProvider
 
     protected function mapApiRoutes()
     {
-        Route::prefix('Nitseditor\api')
+        Route::prefix('api')
             ->middleware('api')
             ->namespace($this->namespace)
             ->group(__DIR__ . '\..\Routes\api.php');
@@ -33,8 +33,7 @@ class NitsRoutesServiceProvider extends RouteServiceProvider
 
     protected function mapWebRoutes()
     {
-        Route::prefix('Nitseditor')
-            ->middleware('web')
+        Route::middleware('web')
             ->namespace($this->namespace)
             ->group(__DIR__ . '\..\Routes\web.php');
     }
