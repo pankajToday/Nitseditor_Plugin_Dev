@@ -18,22 +18,22 @@ You will get home page of nits editor.
     
 Now there are few commands which you can utilise to create your plugins for example suppose you want to create blogs plugin then you can type:
 
-    $ php artisan nitsPlugin:createPlugin blogs
+    $ php artisan nitsPlugin:createPlugin
     
-This will create plugin folder inside the the package and create necessary files to run plugins.
-
-To make your plugins work you need to go to the package folder inside the `System/config.php`, you need to define your plugin something like this:
+It will ask for the plugin name which needs to be implemented while entering it, this will create plugin folder inside the the package and create necessary files to run plugins.
+For example we name our plugin as Blog
+To make your plugins work you need to go to the package folder inside the `System/config.php`, and you need to define your plugin something like this:
 
     'packages' => [
-        'blogs'         => [
-            'name'             => 'Blogs',
-            'description'      => 'NitsEditor Blog for Laravel 5.4',
+        'blog'         => [
+            'name'             => 'Blog', //This is the folder name which will be created, this should be exaclty same as name defined while creating plugin
+            'description'      => 'NitsEditor Blog for Laravel 5.4', //A small description of project or plugin.
         ],
     ],
     
 Now once the setup is done you can cross check the functionality by typing your plugin name as prefix to home router. for example in this case you can see
 
-    http://localhost/your_project_folder/Blogs/
+    http://localhost/your_project_folder/Blog/
     
 You can see the page appearing and describing it is coming from the plugins folder.
 
