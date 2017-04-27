@@ -8,6 +8,7 @@ use Nitseditor\System\Commands\CreateDatabaseCommand;
 use Nitseditor\System\Commands\CreatePluginCommand;
 use Nitseditor\System\Commands\MakeControllerCommand;
 use Nitseditor\System\Commands\MakeModelCommand;
+use Nitseditor\System\Commands\MigrateDatabaseCommand;
 
 class NitsEditorServiceProvider extends ServiceProvider
 {
@@ -67,6 +68,7 @@ class NitsEditorServiceProvider extends ServiceProvider
         $this->registerMakeModelCommands();
         $this->registerMakeControllerCommands();
         $this->registerCreateDatabaseCommands();
+        $this->registerMigrateDatabaseCommands();
     }
 
     /**
@@ -122,6 +124,19 @@ class NitsEditorServiceProvider extends ServiceProvider
     }
 
     /**
+     * Register the nitsPlugin:createDatabase Command.
+     *
+     * @return void
+     */
+    public function registerMigrateDatabaseCommands()
+    {
+        $this->commands('command.nitsPlugin.migrateDatabase');
+        $this->app->singleton('command.nitsPlugin.migrateDatabase', function ($app) {
+            return new MigrateDatabaseCommand();
+        });
+    }
+
+    /**
      * Get the services provided by the provider.
      * @return array
      */
@@ -131,7 +146,8 @@ class NitsEditorServiceProvider extends ServiceProvider
             'command.nitsPlugin.createPlugin',
             'command.nitsPlugin.makeModel',
             'command.nitsPlugin.makeController',
-            'command.nitsPlugin.createDatabase'
+            'command.nitsPlugin.createDatabase',
+            'command.nitsPlugin.migrateDatabase'
         ];
     }
 }

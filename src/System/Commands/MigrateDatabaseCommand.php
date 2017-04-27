@@ -2,32 +2,31 @@
 
 namespace Nitseditor\System\Commands;
 
-
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
-class CreateDatabaseCommand extends Command
+class MigrateDatabaseCommand extends Command
 {
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'nitsPlugin:createDatabase';
+    protected $name = 'nitsPlugin:migrateDatabase';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command for creation of Nitseditor Plugin\'s Database.';
+    protected $description = 'Command for migration of Nitseditor Plugin\'s Database.';
 
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'nitsPlugin:createDatabase {databaseName}';
+    protected $signature = 'nitsPlugin:migrateDatabase {databaseName}';
 
     /**
      * Retrieving base path into variable
@@ -67,62 +66,23 @@ class CreateDatabaseCommand extends Command
             }
             else
             {
-                $dbPath = $this->directoryPath .'\\'. $pluginName . '\Databases\\' . $dbName . 'Table.php';
-                File::put($dbPath, $this->makeDatabaseContent($dbName, $pluginName));
+                call_user_func(array('Nitseditor\Plugins' . $pluginName.'\Databases\\' . $dbName . 'Table', 'up'));
             }
         }
         else
         {
             foreach($plugins as $plugin)
             {
-                $dbPath = $plugin . '\Databases\\' . $dbName . 'Table.php';
                 $pluginName = str_replace($this->directoryPath, '', $plugin);
-                File::put($dbPath, $this->makeDatabaseContent($dbName, $pluginName));
+                call_user_func(array('Nitseditor\Plugins' . $pluginName.'\Databases\\' . $dbName . 'Table', 'up'));
+                $this->info('Migrated successfully');
             }
         }
-
     }
 
     public function getPlugins()
     {
         $list = File::directories($this->directoryPath);
         return $list;
-    }
-
-    public function makeDatabaseContent($dbName, $pluginName)
-    {
-        return '<?php
-
-namespace Nitseditor\Plugins'. $pluginName .'\Databases;        
-
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
-use Nitseditor\System\Database\Migrations;
-
-class '. $dbName .'Table extends Migrations
-{
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create(\''. $dbName .'\', function (Blueprint $table) {
-        
-        });
-    }
-    
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists(\''. $dbName .'\');
-    }
-}
-    ';
     }
 }
