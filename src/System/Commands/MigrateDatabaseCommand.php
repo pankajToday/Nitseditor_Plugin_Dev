@@ -43,7 +43,7 @@ class MigrateDatabaseCommand extends Command
     {
         parent::__construct();
         $this->basePath = base_path();
-        $this->directoryPath = $this->basePath . '\vendor\noeticitservices\plugindev\src\Plugins';
+        $this->directoryPath = $this->basePath . '/vendor/noeticitservices/plugindev/src/Plugins';
     }
 
     /**
@@ -59,7 +59,7 @@ class MigrateDatabaseCommand extends Command
         {
             $this->info('You have multiple plugins installed');
             $pluginName = $this->ask('Enter the plugin name');
-            $path = $this->directoryPath .'\\'. $pluginName .'\config.php';
+            $path = $this->directoryPath .'/'. $pluginName .'/config.php';
             if(!File::exists($path))
             {
                 $this->info('Plugin does not exists');

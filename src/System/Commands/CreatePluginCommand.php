@@ -35,7 +35,7 @@ class CreatePluginCommand extends Command
     {
         parent::__construct();
         $this->basePath = base_path();
-        $this->directoryPath = $this->basePath. '\vendor\noeticitservices\plugindev\src\Plugins\\';
+        $this->directoryPath = $this->basePath. '/vendor/noeticitservices/plugindev/src/Plugins/';
     }
 
     /**
@@ -48,7 +48,7 @@ class CreatePluginCommand extends Command
         $this->info('Create plugins for NitsEditor');
         $pluginName = $this->ask('Tell us your plugin name:');
 
-        $path = $this->directoryPath . $pluginName .'\config.php';
+        $path = $this->directoryPath . $pluginName .'/config.php';
         if(!File::exists($path))
         {
             if(!File::isDirectory($this->directoryPath))
@@ -77,26 +77,26 @@ class CreatePluginCommand extends Command
     public function makeFolders($pluginName)
     {
         File::makeDirectory($this->directoryPath . $pluginName);
-        File::makeDirectory($this->directoryPath . $pluginName .'\Controllers');
-        File::makeDirectory($this->directoryPath . $pluginName .'\Controllers\Middlewares');
-        File::makeDirectory($this->directoryPath . $pluginName .'\Routes');
-        File::makeDirectory($this->directoryPath . $pluginName .'\Views');
-        File::makeDirectory($this->directoryPath . $pluginName .'\Models');
-        File::makeDirectory($this->directoryPath . $pluginName .'\Databases');
-        File::makeDirectory($this->directoryPath . $pluginName .'\Events');
-        File::makeDirectory($this->directoryPath . $pluginName .'\Exceptions');
-        File::makeDirectory($this->directoryPath . $pluginName .'\Listeners');
-        File::makeDirectory($this->directoryPath . $pluginName .'\Providers');
+        File::makeDirectory($this->directoryPath . $pluginName .'/Controllers');
+        File::makeDirectory($this->directoryPath . $pluginName .'/Controllers/Middlewares');
+        File::makeDirectory($this->directoryPath . $pluginName .'/Routes');
+        File::makeDirectory($this->directoryPath . $pluginName .'/Views');
+        File::makeDirectory($this->directoryPath . $pluginName .'/Models');
+        File::makeDirectory($this->directoryPath . $pluginName .'/Databases');
+        File::makeDirectory($this->directoryPath . $pluginName .'/Events');
+        File::makeDirectory($this->directoryPath . $pluginName .'/Exceptions');
+        File::makeDirectory($this->directoryPath . $pluginName .'/Listeners');
+        File::makeDirectory($this->directoryPath . $pluginName .'/Providers');
         return true;
     }
 
     public function makeFiles($pluginName)
     {
-        File::put($this->directoryPath . $pluginName .'\Routes\web.php', $this->makeWebRoutesContent($pluginName));
-        File::put($this->directoryPath . $pluginName .'\Routes\api.php', $this->makeWebRoutesContent($pluginName));
-        File::put($this->directoryPath . $pluginName .'\config.php', 'Hello');
-        File::put($this->directoryPath . $pluginName .'\Views\home.blade.php', $this->makeViewsContent($pluginName));
-        File::put($this->directoryPath . $pluginName .'\Controllers\HomeController.php', $this->makeControllerContents($pluginName));
+        File::put($this->directoryPath . $pluginName .'/Routes/web.php', $this->makeWebRoutesContent($pluginName));
+        File::put($this->directoryPath . $pluginName .'/Routes/api.php', $this->makeWebRoutesContent($pluginName));
+        File::put($this->directoryPath . $pluginName .'/config.php', 'Hello');
+        File::put($this->directoryPath . $pluginName .'/Views/home.blade.php', $this->makeViewsContent($pluginName));
+        File::put($this->directoryPath . $pluginName .'/Controllers/HomeController.php', $this->makeControllerContents($pluginName));
         return true;
     }
 

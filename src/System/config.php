@@ -2,6 +2,6 @@
 
 return [
     'packages' => [
-        //List of packages..
+        //List of packages.. for format visit plugin readme page
     ],
 ];

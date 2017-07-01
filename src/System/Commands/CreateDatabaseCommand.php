@@ -44,7 +44,7 @@ class CreateDatabaseCommand extends Command
     {
         parent::__construct();
         $this->basePath = base_path();
-        $this->directoryPath = $this->basePath . '\vendor\noeticitservices\plugindev\src\Plugins';
+        $this->directoryPath = $this->basePath . '/vendor/noeticitservices/plugindev/src/Plugins';
     }
 
     /**
@@ -60,14 +60,14 @@ class CreateDatabaseCommand extends Command
         {
             $this->info('You have multiple plugins installed');
             $pluginName = $this->ask('Enter the plugin name');
-            $path = $this->directoryPath .'\\'. $pluginName .'\config.php';
+            $path = $this->directoryPath .'/'. $pluginName .'/config.php';
             if(!File::exists($path))
             {
                 $this->info('Plugin does not exists');
             }
             else
             {
-                $dbPath = $this->directoryPath .'\\'. $pluginName . '\Databases\\' . $dbName . 'Table.php';
+                $dbPath = $this->directoryPath .'/'. $pluginName . '/Databases/' . $dbName . 'Table.php';
                 File::put($dbPath, $this->makeDatabaseContent($dbName, $pluginName));
             }
         }
@@ -75,7 +75,7 @@ class CreateDatabaseCommand extends Command
         {
             foreach($plugins as $plugin)
             {
-                $dbPath = $plugin . '\Databases\\' . $dbName . 'Table.php';
+                $dbPath = $plugin . '/Databases/' . $dbName . 'Table.php';
                 $pluginName = str_replace($this->directoryPath, '', $plugin);
                 File::put($dbPath, $this->makeDatabaseContent($dbName, $pluginName));
             }

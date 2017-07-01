@@ -40,7 +40,7 @@ class MakeControllerCommand extends Command
     {
         parent::__construct();
         $this->basePath = base_path();
-        $this->directoryPath = $this->basePath. '\vendor\noeticitservices\plugindev\src\Plugins';
+        $this->directoryPath = $this->basePath. '/vendor/noeticitservices/plugindev/src/Plugins';
     }
 
     /**
@@ -56,14 +56,14 @@ class MakeControllerCommand extends Command
         {
             $this->info('You have multiple plugins installed');
             $pluginName = $this->ask('Enter the plugin name');
-            $path = $this->directoryPath . $pluginName .'\config.php';
+            $path = $this->directoryPath . $pluginName .'/config.php';
             if(!File::exists($path))
             {
                 $this->info('Plugin does not exists');
             }
             else
             {
-                $controllerPath = $this->directoryPath . $pluginName . '\Controllers\\' . $controllerName . 'Controller.php';
+                $controllerPath = $this->directoryPath . $pluginName . '/Controllers/' . $controllerName . 'Controller.php';
                 File::put($controllerPath, $this->makeControllerContent($controllerName, $pluginName));
             }
         }
@@ -71,7 +71,7 @@ class MakeControllerCommand extends Command
         {
             foreach($plugins as $plugin)
             {
-                $controllerPath = $plugin . '\Controllers\\' . $controllerName . 'Controller.php';
+                $controllerPath = $plugin . '/Controllers/' . $controllerName . 'Controller.php';
                 $pluginName = str_replace($this->directoryPath, '', $plugin);
                 File::put($controllerPath, $this->makeControllerContent($controllerName, $pluginName));
             }

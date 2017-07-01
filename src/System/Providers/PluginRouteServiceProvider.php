@@ -21,7 +21,7 @@ class PluginRouteServiceProvider extends RouteServiceProvider
     {
         $this->packages = $packages;
         $this->path = base_path();
-        $this->directoryPath = '\vendor\noeticitservices\plugindev\src\Plugins\\';
+        $this->directoryPath = '/vendor/noeticitservices/plugindev/src/Plugins/';
         parent::__construct($app);
     }
 
@@ -47,10 +47,10 @@ class PluginRouteServiceProvider extends RouteServiceProvider
             $packageName = Arr::get($package, 'name');
             $namespace = 'Nitseditor\Plugins\\'. $packageName .'\Controllers';
 
-            Route::prefix($packageName .'\api')
+            Route::prefix($packageName .'/api')
                 ->middleware('api')
                 ->namespace($namespace)
-                ->group($this->path . $this->directoryPath . $packageName . '\Routes\api.php');
+                ->group($this->path . $this->directoryPath . $packageName . '/Routes/api.php');
         }
 
     }
@@ -65,7 +65,7 @@ class PluginRouteServiceProvider extends RouteServiceProvider
             Route::prefix($packageName)
                 ->middleware('web')
                 ->namespace($namespace)
-                ->group($this->path . $this->directoryPath . $packageName . '\Routes\web.php');
+                ->group($this->path . $this->directoryPath . $packageName . '/Routes/web.php');
         }
     }
 }

@@ -40,7 +40,7 @@ class MakeModelCommand extends Command
     {
         parent::__construct();
         $this->basePath = base_path();
-        $this->directoryPath = $this->basePath. '\vendor\noeticitservices\plugindev\src\Plugins\\';
+        $this->directoryPath = $this->basePath. '/vendor/noeticitservices/plugindev/src/Plugins/';
     }
 
     /**
@@ -56,14 +56,14 @@ class MakeModelCommand extends Command
         {
             $this->info('You have multiple plugins installed');
             $pluginName = $this->ask('Enter the plugin name');
-            $path = $this->directoryPath . $pluginName .'\config.php';
+            $path = $this->directoryPath . $pluginName .'/config.php';
             if(!File::exists($path))
             {
                 $this->info('Plugin does not exists');
             }
             else
             {
-                $modelPath = $this->directoryPath . $pluginName . '\Models\\' . $modelName . '.php';
+                $modelPath = $this->directoryPath . $pluginName . '/Models/' . $modelName . '.php';
                 File::put($modelPath, $this->makeModelContent($modelName, $pluginName));
             }
         }
@@ -71,7 +71,7 @@ class MakeModelCommand extends Command
         {
             foreach($plugins as $plugin)
             {
-                $modelPath = $plugin . '\Models\\' . $modelName . '.php';
+                $modelPath = $plugin . '/Models/' . $modelName . '.php';
                 $pluginName = str_replace($this->directoryPath, '', $plugin);
                 File::put($modelPath, $this->makeModelContent($modelName, $pluginName));
             }
