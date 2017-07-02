@@ -1,5 +1,6 @@
 # Nitseditor-Plugin-Environment
 
+[![Build Status](https://travis-ci.org/noeticit/Nitseditor_Plugin_Dev.svg?branch=master)](https://travis-ci.org/noeticit/Nitseditor_Plugin_Dev)
 [![Latest Stable Version](https://poser.pugx.org/noeticitservices/plugindev/v/stable)](https://packagist.org/packages/noeticitservices/plugindev)
 [![Total Downloads](https://poser.pugx.org/noeticitservices/plugindev/downloads)](https://packagist.org/packages/noeticitservices/plugindev)
 [![License](https://poser.pugx.org/noeticitservices/plugindev/license)](https://packagist.org/packages/noeticitservices/plugindev)
