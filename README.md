@@ -4,6 +4,10 @@
     [![Total Downloads](https://poser.pugx.org/noeticitservices/plugindev/downloads)](https://packagist.org/packages/noeticitservices/plugindev)
     [![License](https://poser.pugx.org/noeticitservices/plugindev/license)](https://packagist.org/packages/noeticitservices/plugindev)
     
+    <a href="https://packagist.org/packages/noeticitservices/plugindev"><img src="https://poser.pugx.org/noeticitservices/plugindev/d/total.svg" alt="Total Downloads"></a>
+    <a href="https://packagist.org/packages/noeticitservices/plugindev"><img src="https://poser.pugx.org/noeticitservices/plugindev/v/stable.svg" alt="Latest Stable Version"></a>
+    <a href="https://packagist.org/packages/noeticitservices/plugindev"><img src="https://poser.pugx.org/noeticitservices/plugindev/license.svg" alt="License"></a>
+    
 Environment for Nitseditor Plugin development
 
 This package needs laravel installation, First install Laravel in your system, Now go to your installed directory and type:
