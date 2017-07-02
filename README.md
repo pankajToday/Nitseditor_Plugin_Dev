@@ -1,12 +1,8 @@
 # Nitseditor-Plugin-Environment
 
-    [![Latest Stable Version](https://poser.pugx.org/noeticitservices/plugindev/v/stable)](https://packagist.org/packages/noeticitservices/plugindev)
-    [![Total Downloads](https://poser.pugx.org/noeticitservices/plugindev/downloads)](https://packagist.org/packages/noeticitservices/plugindev)
-    [![License](https://poser.pugx.org/noeticitservices/plugindev/license)](https://packagist.org/packages/noeticitservices/plugindev)
-    
-    <a href="https://packagist.org/packages/noeticitservices/plugindev"><img src="https://poser.pugx.org/noeticitservices/plugindev/d/total.svg" alt="Total Downloads"></a>
-    <a href="https://packagist.org/packages/noeticitservices/plugindev"><img src="https://poser.pugx.org/noeticitservices/plugindev/v/stable.svg" alt="Latest Stable Version"></a>
-    <a href="https://packagist.org/packages/noeticitservices/plugindev"><img src="https://poser.pugx.org/noeticitservices/plugindev/license.svg" alt="License"></a>
+[![Latest Stable Version](https://poser.pugx.org/noeticitservices/plugindev/v/stable)](https://packagist.org/packages/noeticitservices/plugindev)
+[![Total Downloads](https://poser.pugx.org/noeticitservices/plugindev/downloads)](https://packagist.org/packages/noeticitservices/plugindev)
+[![License](https://poser.pugx.org/noeticitservices/plugindev/license)](https://packagist.org/packages/noeticitservices/plugindev)
     
 Environment for Nitseditor Plugin development
 
