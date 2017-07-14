@@ -58,7 +58,7 @@ You can see the page appearing and describing it is coming from the plugins fold
 
 Similarly you can have models by this command:
 
-    $ php artisan nitsPlguin:makeModel Blog
+    $ php artisan nitsPlugin:makeModel Blog
     
 You can check your file inside `Plugins/Blog/Models/` folder.    
     
@@ -76,6 +76,6 @@ By default it will make database with class `BlogTable` inside `Plugins/Blog/Dat
     
 For migrating the database:
     
-    $ php artisan nitsPlugin:migrateDatabase Blog
+    $ php artisan migrate
 
 This will by default take the up function inside `BlogTable` class and create the tables in the database.     

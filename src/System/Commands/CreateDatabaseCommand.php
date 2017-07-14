@@ -3,6 +3,7 @@
 namespace Nitseditor\System\Commands;
 
 
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
@@ -56,6 +57,7 @@ class CreateDatabaseCommand extends Command
     {
         $dbName = $this->argument('databaseName');
         $plugins = $this->getPlugins();
+        $time = Carbon::now();
         if(count($plugins) > 1)
         {
             $this->info('You have multiple plugins installed');
@@ -67,7 +69,7 @@ class CreateDatabaseCommand extends Command
             }
             else
             {
-                $dbPath = $this->directoryPath .'/'. $pluginName . '/Databases/' . $dbName . 'Table.php';
+                $dbPath = $this->directoryPath .'/'. $pluginName . '/Databases/' . $time->format('Y_m_d_His'). '_create_'. $dbName . '_table.php';
                 File::put($dbPath, $this->makeDatabaseContent($dbName, $pluginName));
             }
         }
@@ -75,7 +77,7 @@ class CreateDatabaseCommand extends Command
         {
             foreach($plugins as $plugin)
             {
-                $dbPath = $plugin . '/Databases/' . $dbName . 'Table.php';
+                $dbPath = $plugin . '/Databases/' . $time->format('Y_m_d_His'). '_create_'. $dbName . '_table.php';
                 $pluginName = str_replace($this->directoryPath, '', $plugin);
                 File::put($dbPath, $this->makeDatabaseContent($dbName, $pluginName));
             }
@@ -91,15 +93,13 @@ class CreateDatabaseCommand extends Command
 
     public function makeDatabaseContent($dbName, $pluginName)
     {
-        return '<?php
-
-namespace Noetic\Plugins'. $pluginName .'\Databases;        
+        return '<?php     
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
-use Nitseditor\System\Database\Migrations;
+use Illuminate\Database\Migrations\Migration;
 
-class '. $dbName .'Table extends Migrations
+class Create'. ucfirst($dbName) .'Table extends Migration
 {
     /**
      * Run the migrations.
