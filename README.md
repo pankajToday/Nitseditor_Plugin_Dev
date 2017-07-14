@@ -19,6 +19,18 @@ Now publish the configuration files in `config` folder
 
     php artisan vendor:publish
 
+Now configure your `composer.json` file, you need define in psr-4 loader attributes, it should look something like this:
+
+    "autoload": {
+        "classmap": [
+            "database"
+        ],
+        "psr-4": {
+            "App\\": "app/",
+            "Noetic\\Plugins\\": "plugins/"
+        }
+    },
+
 You can check your installation by refreshing the home page, you will get home page of nits editor.
     
 # php artisan nitsPlugin Commands:
