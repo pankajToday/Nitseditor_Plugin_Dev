@@ -22,9 +22,12 @@ class NitsEditorServiceProvider extends ServiceProvider
     {
         $this->app->register('Nitseditor\System\Providers\NitsRoutesServiceProvider');
 
+        $this->publishes([
+            __DIR__.'/../nitseditor.php' => config_path('nitseditor.php'),
+        ]);
+
         $this->loadViewsFrom(__DIR__ . '/../Views', 'NitsEditor');
 
-        $this->mergeConfigFrom(__DIR__ . '/../config.php', 'NitsEditor');
     }
 
     /**
@@ -37,7 +40,7 @@ class NitsEditorServiceProvider extends ServiceProvider
     {
         $this->registerCommands();
 
-        $config = require __DIR__ . '/../config.php';
+        $config = config('nitseditor');
         $packages = Arr::get($config, 'packages', []);
 
         $routeDir = new PluginRouteServiceProvider($this->app, $packages);
@@ -47,7 +50,9 @@ class NitsEditorServiceProvider extends ServiceProvider
 
             $packageName = Arr::get($package, 'name');
 
-            $this->loadViewsFrom(__DIR__ . '/../../Plugins/'. $packageName .'/Views', $packageName);
+            $this->loadViewsFrom(base_path().'/plugins/'. $packageName .'/Views', $packageName);
+
+            $this->loadMigrationsFrom(base_path().'/plugins/'. $packageName .'/Databases');
 
         }
 

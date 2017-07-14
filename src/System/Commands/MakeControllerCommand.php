@@ -40,7 +40,7 @@ class MakeControllerCommand extends Command
     {
         parent::__construct();
         $this->basePath = base_path();
-        $this->directoryPath = $this->basePath. '/vendor/noeticitservices/plugindev/src/Plugins';
+        $this->directoryPath = $this->basePath. '/plugins/';
     }
 
     /**
@@ -56,7 +56,7 @@ class MakeControllerCommand extends Command
         {
             $this->info('You have multiple plugins installed');
             $pluginName = $this->ask('Enter the plugin name');
-            $path = $this->directoryPath . $pluginName .'/config.php';
+            $path = $this->directoryPath . $pluginName .'/nitseditor.php';
             if(!File::exists($path))
             {
                 $this->info('Plugin does not exists');
@@ -89,7 +89,7 @@ class MakeControllerCommand extends Command
     {
         return '<?php
 
-namespace Nitseditor\Plugins' . $pluginName . '\Controllers;
+namespace Noetic\Plugins' . $pluginName . '\Controllers;
         
               
 use App\Http\Controllers\Controller;

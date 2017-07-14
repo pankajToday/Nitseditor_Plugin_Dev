@@ -15,6 +15,10 @@ Now add the following service provider in `config/app.php` file
 
     Nitseditor\System\Providers\NitsEditorServiceProvider::class,
     
+Now publish the configuration files in `config` folder
+
+    php artisan vendor:publish
+
 You can check your installation by refreshing the home page, you will get home page of nits editor.
     
 # php artisan nitsPlugin Commands:
@@ -24,8 +28,8 @@ There are few commands which you can utilise to create your plugins for example 
     $ php artisan nitsPlugin:createPlugin
     
 It will ask for the plugin name which needs to be implemented while entering it, this will create plugin folder inside the the package and create necessary files to run plugins.
-For example we name our plugin as Blog
-To make your plugins work you need to go to the package folder inside the `System/config.php`, and you need to define your plugin something like this:
+For example we name our plugin as `Blog`
+To make your plugins work you need to go to the `config` folder and `nitseditor.php` file, and you need to define your plugin something like this:
 
     'packages' => [
         'blog'         => [

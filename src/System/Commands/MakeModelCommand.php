@@ -40,7 +40,7 @@ class MakeModelCommand extends Command
     {
         parent::__construct();
         $this->basePath = base_path();
-        $this->directoryPath = $this->basePath. '/vendor/noeticitservices/plugindev/src/Plugins/';
+        $this->directoryPath = $this->basePath. '/plugins/';
     }
 
     /**
@@ -56,7 +56,7 @@ class MakeModelCommand extends Command
         {
             $this->info('You have multiple plugins installed');
             $pluginName = $this->ask('Enter the plugin name');
-            $path = $this->directoryPath . $pluginName .'/config.php';
+            $path = $this->directoryPath . $pluginName .'/nitseditor.php';
             if(!File::exists($path))
             {
                 $this->info('Plugin does not exists');
@@ -88,7 +88,7 @@ class MakeModelCommand extends Command
     public function makeModelContent($modelName, $pluginName)
     {
         return '<?php
-namespace Nitseditor\Plugins' . $pluginName . '\Models;
+namespace Noetic\Plugins' . $pluginName . '\Models;
 
 use Nitseditor\System\Models\AbstractModel;
 
