@@ -68,77 +68,13 @@ class NitsEditorServiceProvider extends ServiceProvider
      */
     public function registerCommands()
     {
-        $this->registerCreatePluginCommands();
-        $this->registerMakeModelCommands();
-        $this->registerMakeControllerCommands();
-        $this->registerCreateDatabaseCommands();
-    }
-
-    /**
-     * Register the nitsPlugin:install Command.
-     *
-     * @return void
-     */
-    public function registerCreatePluginCommands()
-    {
-        $this->commands('command.nitsPlugin.createPlugin');
-        $this->app->singleton('command.nitsPlugin.createPlugin', function ($app) {
-            return new CreatePluginCommand();
-        });
-    }
-
-    /**
-     * Register the nitsPlugin:makeModel Command.
-     *
-     * @return void
-     */
-    public function registerMakeModelCommands()
-    {
-        $this->commands('command.nitsPlugin.makeModel');
-        $this->app->singleton('command.nitsPlugin.makeModel', function ($app) {
-            return new MakeModelCommand();
-        });
-    }
-
-    /**
-     * Register the nitsPlugin:makeController Command.
-     *
-     * @return void
-     */
-    public function registerMakeControllerCommands()
-    {
-        $this->commands('command.nitsPlugin.makeController');
-        $this->app->singleton('command.nitsPlugin.makeController', function ($app) {
-            return new MakeControllerCommand();
-        });
-    }
-
-    /**
-     * Register the nitsPlugin:createDatabase Command.
-     *
-     * @return void
-     */
-    public function registerCreateDatabaseCommands()
-    {
-        $this->commands('command.nitsPlugin.createDatabase');
-        $this->app->singleton('command.nitsPlugin.createDatabase', function ($app) {
-            return new CreateDatabaseCommand();
-        });
-    }
-
-
-
-    /**
-     * Get the services provided by the provider.
-     * @return array
-     */
-    public function provides()
-    {
-        return [
-            'command.nitsPlugin.createPlugin',
-            'command.nitsPlugin.makeModel',
-            'command.nitsPlugin.makeController',
-            'command.nitsPlugin.createDatabase'
-        ];
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                CreatePluginCommand::class,
+                MakeModelCommand::class,
+                MakeControllerCommand::class,
+                CreateDatabaseCommand::class,
+            ]);
+        }
     }
 }
