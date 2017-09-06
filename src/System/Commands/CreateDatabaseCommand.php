@@ -14,7 +14,7 @@ class CreateDatabaseCommand extends Command
      *
      * @var string
      */
-    protected $name = 'nitsPlugin:createDatabase';
+    protected $name = 'nitsPlugin:createTable';
 
     /**
      * The console command description.
@@ -28,7 +28,7 @@ class CreateDatabaseCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'nitsPlugin:createDatabase {databaseName}';
+    protected $signature = 'nitsPlugin:createTable {databaseName}';
 
     /**
      * Retrieving base path into variable
