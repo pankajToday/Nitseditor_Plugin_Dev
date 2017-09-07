@@ -2,6 +2,6 @@
 
 return [
     'packages' => [
-        //List of packages.. for format visit plugin readme page
+        //List of packages, this needs to be an array, format is prorperly available in read me/documentation.
     ],
 ];
