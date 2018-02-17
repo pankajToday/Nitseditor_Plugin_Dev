@@ -67,11 +67,11 @@ For controllers you can type:
     
 By default it will create `BlogController` class inside `Plugins/Blog/Controllers/BlogController` folder
 
-You can create databases by this command:
+You can create databases with tables by this command:
 
-    $ php artisan nitsPlugin:createDatabase Blog
+    $ php artisan nitsPlugin:createDatabase Blog table=blogs
     
-By default it will make database with class `BlogTable` inside `Plugins/Blog/Databases/`
+By default it will make database with class `BlogTable` and table name as blogs inside `Plugins/Blog/Databases/`
     
 For migrating the database:
     
