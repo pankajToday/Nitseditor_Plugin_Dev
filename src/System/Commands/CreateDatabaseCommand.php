@@ -21,14 +21,14 @@ class CreateDatabaseCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command for creation of Nitseditor Plugin\'s Database.';
+    protected $description = 'Command for creation of Nitseditor Plugin\'s Table.';
 
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'nitsPlugin:createTable {databaseName}';
+    protected $signature = 'nitsPlugin:createTable {migrationName} {tableName} ';
 
     /**
      * Retrieving base path into variable
@@ -55,7 +55,8 @@ class CreateDatabaseCommand extends Command
      */
     public function handle()
     {
-        $dbName = $this->argument('databaseName');
+        $migrationName = $this->argument('migrationName');
+        $tableName = $this->argument('tableName');
         $plugins = $this->getPlugins();
         $time = Carbon::now();
         if(count($plugins) > 1)
@@ -69,17 +70,17 @@ class CreateDatabaseCommand extends Command
             }
             else
             {
-                $dbPath = $this->directoryPath .'/'. $pluginName . '/Databases/' . $time->format('Y_m_d_His'). '_create_'. $dbName . '_table.php';
-                File::put($dbPath, $this->makeDatabaseContent($dbName, $pluginName));
+                $dbPath = $this->directoryPath .'/'. $pluginName . '/Databases/' . $time->format('Y_m_d_His'). '_create_'. $migrationName . '_table.php';
+                File::put($dbPath, $this->makeDatabaseContent($migrationName , $tableName, $pluginName ));
             }
         }
         else
         {
             foreach($plugins as $plugin)
             {
-                $dbPath = $plugin . '/Databases/' . $time->format('Y_m_d_His'). '_create_'. $dbName . '_table.php';
+                $dbPath = $plugin . '/Databases/' . $time->format('Y_m_d_His'). '_create_'. $migrationName . '_table.php';
                 $pluginName = str_replace($this->directoryPath, '', $plugin);
-                File::put($dbPath, $this->makeDatabaseContent($dbName, $pluginName));
+                File::put($dbPath, $this->makeDatabaseContent($migrationName , $tableName, $pluginName));
             }
         }
 
@@ -91,15 +92,16 @@ class CreateDatabaseCommand extends Command
         return $list;
     }
 
-    public function makeDatabaseContent($dbName, $pluginName)
+    public function makeDatabaseContent($migrationName , $tableName, $pluginName)
     {
-        return '<?php     
+        $tableNameArr = explode('=',$tableName);
+        return '<?php
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Create'. ucfirst($dbName) .'Table extends Migration
+class Create'. ucfirst($migrationName) .'Table extends Migration
 {
     /**
      * Run the migrations.
@@ -108,8 +110,10 @@ class Create'. ucfirst($dbName) .'Table extends Migration
      */
     public static function up()
     {
-        Schema::create(\''. $dbName .'\', function (Blueprint $table) {
-        
+        Schema::create(\''. $tableNameArr[1] .'\', function (Blueprint $table) {
+         $table->increments("id");
+
+          $table->timestamps();
         });
     }
     
@@ -120,7 +124,7 @@ class Create'. ucfirst($dbName) .'Table extends Migration
      */
     public static function down()
     {
-        Schema::dropIfExists(\''. $dbName .'\');
+        Schema::dropIfExists(\''. $tableNameArr[1] .'\');
     }
 }
     ';
