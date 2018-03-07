@@ -18,6 +18,89 @@ Now publish the configuration files in `config` folder
 
     php artisan vendor:publish
 
+# Configure passport setup, 
+
+Configure your model with:
+
+    <?php
+    
+    namespace Noetic\Plugins\blog\Models;
+    
+    use Illuminate\Database\Eloquent\Model;
+    use Illuminate\Notifications\Notifiable;
+    use Illuminate\Foundation\Auth\User as Authenticatable;
+    use Laravel\Passport\HasApiTokens;
+    
+    class User extends Authenticatable
+    {
+       use Notifiable, HasApiTokens; 
+
+In you config\auth.php
+
+    'guards' => [
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+
+        'api' => [
+            'driver' => 'passport',
+            'provider' => 'users',
+        ],
+
+        'nitseditor_blog' => [
+            'driver' => 'passport',
+            'provider' => 'blogUsers',
+        ],
+    ],
+    
+    'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+    
+        // 'users' => [
+        //     'driver' => 'database',
+        //     'table' => 'users',
+        // ],
+    
+        'blogUsers' => [
+            'driver' => 'eloquent',
+            'model' => Noetic\Plugins\blog\Models\User::class,
+        ]
+    ],
+
+Register the middlewares `AddCustomProvider` and `ConfigAccessTokenCustomProvider` on `app/Http/Kernel` `$middlewareGroups` attribute.
+
+    'api' => [
+            'throttle:60,1',
+            'bindings',
+            'nits-provider'
+        ],
+
+        'nits-provider' => [
+            \Nitseditor\System\Middlewares\AddCustomProvider::class,
+            \Nitseditor\System\Middlewares\ConfigAccessTokenCustomProvider::class,
+        ]
+    ];
+    
+Encapsulate the passport routes for access token with the registered middleware in `AuthServiceProvider`:
+
+    public function boot()
+    {
+        $this->registerPolicies();
+
+        Passport::routes();
+
+        // Middleware `api` that contains the `custom-provider` middleware group defined on $middlewareGroups above
+        Route::group(['middleware' => 'api'], function () {
+            Passport::routes(function ($router) {
+                return $router->forAccessTokens();
+            });
+        });
+    }
+
 Now configure your `composer.json` file, you need define in psr-4 loader attributes, it should look something like this:
 
     "autoload": {
@@ -32,6 +115,33 @@ Now configure your `composer.json` file, you need define in psr-4 loader attribu
 
 You can check your installation by refreshing the home page, you will get home page of nits editor.
     
+#Usage
+Add the provider parameter in your request at /oauth/token:
+    
+    POST /oauth/token HTTP/1.1
+    Host: localhost
+    Accept: application/json, text/plain, */*
+    Content-Type: application/json;charset=UTF-8
+    Cache-Control: no-cache
+
+    {
+        "username":"user@domain.com",
+        "password":"password",
+        "grant_type" : "password",
+        "client_id": "client-id",
+        "client_secret" : "client-secret",
+        "provider" : "blogUsers"
+    }    
+
+You can pass your guards on auth middleware as you wish. Example:
+
+    Route::group(['middleware' => ['api', 'auth:nitseditor_blog']], function () {
+        Route::get('/user', function ($request) {
+            // Get the logged blog user instance
+            return $request->user(); // You can use too `$request->user('nitseditor_blog')` passing the guard.
+        });
+    });    
+   
 # php artisan nitsPlugin Commands:
 
 There are few commands which you can utilise to create your plugins for example suppose you want to create blogs plugin then you can type:
