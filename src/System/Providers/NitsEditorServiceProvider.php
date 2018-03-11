@@ -116,9 +116,5 @@ class NitsEditorServiceProvider extends ServiceProvider
     {
         $migrationsPath = __DIR__.'/../Database';
         $this->loadMigrationsFrom($migrationsPath);
-//        $this->publishes(
-//            [$migrationsPath => database_path('migrations')],
-//            'migrations'
-//        );
     }
 }

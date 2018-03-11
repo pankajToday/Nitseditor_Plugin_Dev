@@ -1,9 +1,7 @@
 <?php
 namespace Nitseditor\System\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Provider extends Model
+class Provider extends AbstractModel
 {
     /**
      * The database table used by the model.
