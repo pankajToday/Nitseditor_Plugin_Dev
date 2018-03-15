@@ -26,14 +26,15 @@ class AbstractModel extends Model
     {
         parent::boot();
 
-        // Decrypt the attributes.
+        $enrypt = Config::
+        // Decrypt the nits_encryption attributes.
         static::retrieved(function ($instance) {
             foreach ($instance->nits_encryption as $encryptedKey) {
                 $instance->attributes[$encryptedKey] = Crypt::decryptString($instance->attributes[$encryptedKey]);
             }
         });
 
-        // Encrypt the attributes.
+        // Encrypt the nits_encryption attributes.
         static::saving(function ($instance) {
             foreach ($instance->nits_encryption as $encryptedKey) {
                 $instance->attributes[$encryptedKey] = Crypt::encryptString($instance->attributes[$encryptedKey]);
