@@ -1,1 +1,20 @@
 language: php
+php:
+  - 7.0
+  - 7.1
+before_install:
+  - composer self-update
+  - composer create-project laravel/laravel
+  - cd ./laravel
+  - composer config repositories.noeticit vcs https://github.com/noeticit/Nitseditor_Plugin_Dev.git
+  - composer require noeticitservices/plugindev dev-master
+  - composer update
+  - cp ./vendor/noeticitservices/plugindev/tests/config/.env ./
+  - rm ./config/app.php
+  - cp ./vendor/noeticitservices/plugindev/tests/config/app.php ./config
+  - php artisan vendor:publish --provider=Nitseditor\System\Providers\NitsEditorServiceProvider
+  - mysql -e "create database IF NOT EXISTS test;" -uroot
+  - php artisan migrate
+  - cd ./vendor/noeticitservices/plugindev
+
+script: "phpunit"
