@@ -4,8 +4,8 @@ php:
   - 7.1
 before_install:
   - composer self-update
-  - composer create-project laravel/laravel
-  - cd ./laravel
+  - composer create-project --prefer-dist laravel/laravel nitseditor
+  - cd ./nitseditor
   - composer config repositories.noeticitservices vcs https://github.com/noeticit/Nitseditor_Plugin_Dev.git
   - composer require noeticitservices/plugindev dev-master
   - composer update
