@@ -4,6 +4,7 @@ namespace Nitseditor\System\Providers;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
 use Nitseditor\System\Commands\CreateDatabaseCommand;
 use Nitseditor\System\Commands\CreatePluginCommand;
 use Nitseditor\System\Commands\MakeControllerCommand;
@@ -22,6 +23,8 @@ class NitsEditorServiceProvider extends ServiceProvider
      */
     public function boot(ProviderRepository $providers)
     {
+        Schema::defaultStringLength(191);
+
         $this->app->register('Nitseditor\System\Providers\NitsRoutesServiceProvider');
 
         $this->publishes([
