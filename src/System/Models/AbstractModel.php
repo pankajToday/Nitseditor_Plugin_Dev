@@ -26,7 +26,7 @@ class AbstractModel extends Model
     {
         parent::boot();
 
-        $enrypt = config('nitseditor.app_env');
+        $encrypt = config('nitseditor.app_env');
         if($encrypt == 'prod')
         {
             // Decrypt the nits_encryption attributes.
