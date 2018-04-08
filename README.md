@@ -71,7 +71,7 @@ In you config\auth.php
         ]
     ],
 
-Register the middlewares `AddCustomProvider` and `ConfigAccessTokenCustomProvider` on `app/Http/Kernel` `$middlewareGroups` attribute.
+Register the middleware `AddCustomProvider` and `ConfigAccessTokenCustomProvider` on `app/Http/Kernel` `$middlewareGroups` attribute.
 
     'api' => [
             'throttle:60,1',
@@ -115,7 +115,7 @@ Now configure your `composer.json` file, you need define in psr-4 loader attribu
 
 You can check your installation by refreshing the home page, you will get home page of nits editor.
     
-#Usage
+# Usage
 
 Add the provider parameter in your request at /oauth/token:
     
@@ -143,11 +143,11 @@ You can pass your guards on auth middleware as you wish. Example:
         });
     });    
     
-Do migration of passport by command `php artisan migrate` and then write `php artisan passport:install` to do the intial installation
+Do migration of passport by command `php artisan migrate` and then write `php artisan passport:install` to do the initial installation
    
 # php artisan nitsPlugin Commands:
 
-There are few commands which you can utilise to create your plugins for example suppose you want to create blogs plugin then you can type:
+There are few commands which you can utilise to create your plugins for example suppose you want to create blog plugin then you can type:
 
     $ php artisan nitsPlugin:createPlugin
     
@@ -184,7 +184,7 @@ You can create databases with tables by this command:
 
     $ php artisan nitsPlugin:createDatabase Blog table=blogs
     
-By default it will make database with class `BlogTable` and table name as blogs inside `Plugins/Blog/Databases/`
+By default it will make database with class `BlogTable` and table name as blog inside `Plugins/Blog/Databases/`
     
 For migrating the database:
     
