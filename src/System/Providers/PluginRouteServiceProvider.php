@@ -62,8 +62,7 @@ class PluginRouteServiceProvider extends RouteServiceProvider
             $packageName = Arr::get($package, 'name');
             $namespace = 'Noetic\Plugins\\' . $packageName . '\Controllers';
 
-            Route::prefix($packageName)
-                ->middleware('web')
+            Route::middleware('web')
                 ->namespace($namespace)
                 ->group($this->path . $this->directoryPath . $packageName . '/Routes/web.php');
         }
