@@ -116,6 +116,7 @@ Now configure your `composer.json` file, you need define in psr-4 loader attribu
 You can check your installation by refreshing the home page, you will get home page of nits editor.
     
 #Usage
+
 Add the provider parameter in your request at /oauth/token:
     
     POST /oauth/token HTTP/1.1
@@ -141,6 +142,8 @@ You can pass your guards on auth middleware as you wish. Example:
             return $request->user(); // You can use too `$request->user('nitseditor_blog')` passing the guard.
         });
     });    
+    
+Do migration of passport by command `php artisan migrate` and then write `php artisan passport:install` to do the intial installation
    
 # php artisan nitsPlugin Commands:
 
