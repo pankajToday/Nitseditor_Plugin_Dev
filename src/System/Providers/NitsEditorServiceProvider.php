@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Nitseditor\System\Commands\CreateDatabaseCommand;
 use Nitseditor\System\Commands\CreatePluginCommand;
+use Nitseditor\System\Commands\CreateRequestCommand;
 use Nitseditor\System\Commands\MakeControllerCommand;
 use Nitseditor\System\Commands\MakeModelCommand;
 use Illuminate\Support\Facades\Event;
@@ -87,6 +88,7 @@ class NitsEditorServiceProvider extends ServiceProvider
                 MakeModelCommand::class,
                 MakeControllerCommand::class,
                 CreateDatabaseCommand::class,
+                CreateRequestCommand::class,
             ]);
         }
     }
