@@ -83,6 +83,7 @@ class CreatePluginCommand extends Command
         File::makeDirectory($this->directoryPath . $pluginName .'/Views');
         File::makeDirectory($this->directoryPath . $pluginName .'/Models');
         File::makeDirectory($this->directoryPath . $pluginName .'/Databases');
+        File::makeDirectory($this->directoryPath . $pluginName .'/Databases/seeds');
         File::makeDirectory($this->directoryPath . $pluginName .'/Events');
         File::makeDirectory($this->directoryPath . $pluginName .'/Exceptions');
         File::makeDirectory($this->directoryPath . $pluginName .'/Listeners');
@@ -94,6 +95,8 @@ class CreatePluginCommand extends Command
     {
         File::put($this->directoryPath . $pluginName .'/Routes/web.php', $this->makeWebRoutesContent($pluginName));
         File::put($this->directoryPath . $pluginName .'/Routes/api.php', $this->makeWebRoutesContent($pluginName));
+        File::put($this->directoryPath . $pluginName .'/Databases/seeds/InstallDatabase.php', $this->makeSeeders($pluginName));
+        File::put($this->directoryPath . $pluginName .'/Databases/seeds/UninstallDatabase.php', $this->makeSeeders($pluginName));
         File::put($this->directoryPath . $pluginName .'/nitseditor.php', 'Hello');
         File::put($this->directoryPath . $pluginName .'/Views/home.blade.php', $this->makeViewsContent($pluginName));
         File::put($this->directoryPath . $pluginName .'/Controllers/HomeController.php', $this->makeControllerContents($pluginName));
@@ -204,6 +207,27 @@ class HomeController extends Controller
     public function index()
     {
         return view(\'' . $pluginName . '::home\');
+    }
+}';
+    }
+
+    public function makeSeeders($pluginName)
+    {
+        return '<?php
+namespace Noetic\Plugins\blog\Databases\seeds;
+
+use Illuminate\Database\Seeder;
+
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        // $this->call(UsersTableSeeder::class);
     }
 }';
     }
