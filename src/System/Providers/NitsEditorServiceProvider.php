@@ -13,6 +13,8 @@ use Nitseditor\System\Commands\MakeModelCommand;
 use Illuminate\Support\Facades\Event;
 use Laravel\Passport\Events\AccessTokenCreated;
 use Nitseditor\System\Providers\ProviderRepository;
+use Illuminate\Database\Eloquent\Factory;
+use Faker\Generator as Faker;
 
 class NitsEditorServiceProvider extends ServiceProvider
 {
@@ -66,6 +68,11 @@ class NitsEditorServiceProvider extends ServiceProvider
             $this->loadViewsFrom(base_path().'/plugins/'. $packageName .'/Views', $packageName);
 
             $this->loadMigrationsFrom(base_path().'/plugins/'. $packageName .'/Databases');
+
+            $this->app->singleton(Factory::class, function () use($packageName){
+                $faker = $this->app->make(Faker::class);
+                return Factory::construct($faker,base_path().'/plugins/'. $packageName . '/Databases/factories');
+            });
 
         }
 
