@@ -145,7 +145,20 @@ You can pass your guards on auth middleware as you wish. Example:
     
 Do migration of passport by command `php artisan migrate` and then write `php artisan passport:install` to do the initial installation
 
-To seed plugins database you can do command `php artisan db:seed --class="Noetic\Plugins\blog\Databases\seeds\InstallDatabase"` and to uninstall you can do `php artisan db:seed --class="Noetic\Plugins\blog\Databases\seeds\InstallDatabase` where `blog` written in the class name is your plugin name. 
+To seed plugins database you can do command 
+
+    php artisan db:seed --class="Noetic\Plugins\blog\Databases\seeds\InstallDatabase" 
+
+and to uninstall you can do 
+
+    php artisan db:seed --class="Noetic\Plugins\blog\Databases\seeds\InstallDatabase" 
+
+where `blog` written in the class name is your plugin name. Or you can include these inside your `database/seeds/DatabaseSeeder` class as :
+
+    public function run()
+    {
+         $this->call(\Noetic\Plugins\blog\Databases\seeds\InstallDatabase::class);
+    }
    
 # php artisan nitsPlugin Commands:
 
