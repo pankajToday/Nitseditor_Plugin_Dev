@@ -19,6 +19,9 @@
         "orchestra/database": "^3.5"
     },
     "autoload": {
+        "files": [
+            "src/System/Helpers/helpers.php"
+        ],
         "classmap": [
             "src/System/Database"
         ],
