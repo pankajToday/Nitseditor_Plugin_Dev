@@ -37,6 +37,8 @@ class PluginRouteServiceProvider extends RouteServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
+
+        $this->mapAppApiRoutes();
     }
 
 
@@ -54,6 +56,31 @@ class PluginRouteServiceProvider extends RouteServiceProvider
         }
 
     }
+
+    /**
+     * Define the "App API " routes for the  Mobile Application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapAppApiRoutes()
+    {
+        foreach ($this->packages as $package) {
+
+            $packageName = Arr::get($package, 'name');
+            $namespace = 'Noetic\Plugins\\' . $packageName . '\Controllers';
+
+            Route::prefix($packageName .'/api')
+                ->middleware('api')
+                ->namespace($namespace)
+                ->group($this->path . $this->directoryPath . $packageName . '/Routes/appApi.php');
+        }
+    }
+
+
+
+
 
     protected function mapWebRoutes()
     {
