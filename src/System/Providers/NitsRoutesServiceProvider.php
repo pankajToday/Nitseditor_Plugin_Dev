@@ -4,6 +4,7 @@ namespace Nitseditor\System\Providers;
 
 
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 
 class NitsRoutesServiceProvider extends RouteServiceProvider
@@ -33,8 +34,13 @@ class NitsRoutesServiceProvider extends RouteServiceProvider
 
     protected function mapWebRoutes()
     {
-        Route::middleware('web')
-            ->namespace($this->namespace)
-            ->group(__DIR__ . '/../Routes/web.php');
+        $config = config('nitseditor');
+        $packages = Arr::get($config, 'packages', []);
+        if(!$packages)
+        {
+            Route::middleware('web')
+                ->namespace($this->namespace)
+                ->group(__DIR__ . '/../Routes/web.php');
+        }
     }
 }

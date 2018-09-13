@@ -10,12 +10,21 @@
     ],
     "require": {
         "php": ">=5.6.4",
-        "illuminate/support": "5.5.*",
-        "illuminate/console": "5.5.*",
-        "illuminate/routing": "5.5.*",
-        "illuminate/database": "5.5.*"
+        "illuminate/support": "5.6.*",
+        "illuminate/console": "5.6.*",
+        "illuminate/routing": "5.6.*",
+        "illuminate/database": "5.6.*",
+        "laravel/passport": "^5.0",
+        "orchestra/testbench": "~3.5",
+        "orchestra/database": "^3.5"
     },
     "autoload": {
+        "files": [
+            "src/System/Helpers/helpers.php"
+        ],
+        "classmap": [
+            "src/System/Database"
+        ],
         "psr-4": {
             "Nitseditor\\": "src/"
         }

@@ -4,6 +4,7 @@ namespace Nitseditor\System\Controllers;
 
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Crypt;
 
 class NitsEditorController extends Controller
 {
@@ -11,4 +12,5 @@ class NitsEditorController extends Controller
     {
         return view('NitsEditor::index');
     }
+
 }
