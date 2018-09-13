@@ -21,6 +21,7 @@ class NitsRoutesServiceProvider extends RouteServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
+
     }
 
 
@@ -31,6 +32,7 @@ class NitsRoutesServiceProvider extends RouteServiceProvider
             ->namespace($this->namespace)
             ->group(__DIR__ . '/../Routes/api.php');
     }
+
 
     protected function mapWebRoutes()
     {
@@ -43,4 +45,7 @@ class NitsRoutesServiceProvider extends RouteServiceProvider
                 ->group(__DIR__ . '/../Routes/web.php');
         }
     }
+
+
+
 }

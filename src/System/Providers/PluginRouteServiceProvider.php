@@ -38,7 +38,7 @@ class PluginRouteServiceProvider extends RouteServiceProvider
 
         $this->mapWebRoutes();
 
-        $this->mapAppApiRoutes();
+        $this-> mapAppApiRoutes();
     }
 
 
@@ -55,6 +55,19 @@ class PluginRouteServiceProvider extends RouteServiceProvider
                 ->group($this->path . $this->directoryPath . $packageName . '/Routes/api.php');
         }
 
+    }
+
+    protected function mapWebRoutes()
+    {
+        foreach ($this->packages as $package) {
+
+            $packageName = Arr::get($package, 'name');
+            $namespace = 'Noetic\Plugins\\' . $packageName . '\Controllers';
+
+            Route::middleware('web')
+                ->namespace($namespace)
+                ->group($this->path . $this->directoryPath . $packageName . '/Routes/web.php');
+        }
     }
 
     /**
@@ -79,19 +92,4 @@ class PluginRouteServiceProvider extends RouteServiceProvider
     }
 
 
-
-
-
-    protected function mapWebRoutes()
-    {
-        foreach ($this->packages as $package) {
-
-            $packageName = Arr::get($package, 'name');
-            $namespace = 'Noetic\Plugins\\' . $packageName . '\Controllers';
-
-            Route::middleware('web')
-                ->namespace($namespace)
-                ->group($this->path . $this->directoryPath . $packageName . '/Routes/web.php');
-        }
-    }
 }
